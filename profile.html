@@ -1,0 +1,803 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tejas G | Professional Web Developer</title>
+  <style>
+    /* Base styles */
+    :root {
+      --primary: #2a2a72;
+      --secondary: #009ffd;
+      --accent: #00d4ff;
+      --dark: #121212;
+      --light: #f8f9fa;
+      --transition: all 0.3s ease;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+    
+    body {
+      background-color: var(--dark);
+      color: var(--light);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+    
+    section {
+      padding: 5rem 10%;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    
+    h1, h2, h3 {
+      font-weight: 700;
+      margin-bottom: 1.5rem;
+    }
+    
+    h1 {
+      font-size: 3.5rem;
+      background: linear-gradient(to right, var(--secondary), var(--accent));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    
+    h2 {
+      font-size: 2.5rem;
+    }
+    
+    p {
+      margin-bottom: 1.5rem;
+      font-size: 1.1rem;
+      max-width: 800px;
+    }
+    
+    a {
+      color: var(--secondary);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+    
+    a:hover {
+      color: var(--accent);
+    }
+    
+    button {
+      background: linear-gradient(to right, var(--secondary), var(--accent));
+      color: var(--light);
+      border: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+    
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Navigation */
+    .navbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 10%;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      background-color: rgba(18, 18, 18, 0.9);
+      backdrop-filter: blur(10px);
+    }
+    
+    .logo {
+      font-size: 1.8rem;
+      font-weight: 700;
+      color: var(--light);
+    }
+    
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    
+    .nav-links a {
+      color: var(--light);
+      font-weight: 500;
+      position: relative;
+    }
+    
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: linear-gradient(to right, var(--secondary), var(--accent));
+      transition: var(--transition);
+    }
+    
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+    
+    /* Hero section */
+    .hero {
+      position: relative;
+      overflow: hidden;
+    }
+    
+    .hero-content {
+      position: relative;
+      z-index: 10;
+    }
+    
+    .hero-subtitle {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: var(--secondary);
+    }
+    
+    .hero-btns {
+      display: flex;
+      gap: 1rem;
+      margin-top: 2rem;
+    }
+    
+    .hero-btns .btn-secondary {
+      background: transparent;
+      border: 2px solid var(--secondary);
+    }
+    
+    /* Projects section */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .project-card {
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    
+    .project-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 15px 30px rgba(0, 0, 0, 0.3);
+    }
+    
+    .project-img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    
+    .project-info {
+      padding: 1.5rem;
+    }
+    
+    .project-title {
+      font-size: 1.3rem;
+      margin-bottom: 0.5rem;
+    }
+    
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-top: 1rem;
+    }
+    
+    .project-tag {
+      background-color: rgba(0, 159, 253, 0.2);
+      color: var(--secondary);
+      padding: 0.3rem 0.8rem;
+      border-radius: 30px;
+      font-size: 0.8rem;
+    }
+    
+    /* Skills section */
+    .skills-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+    
+    .skill-card {
+      background-color: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      padding: 1.5rem;
+      text-align: center;
+      transition: var(--transition);
+    }
+    
+    .skill-card:hover {
+      transform: translateY(-5px);
+      background-color: rgba(0, 159, 253, 0.1);
+    }
+    
+    .skill-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      color: var(--secondary);
+    }
+    
+    /* Contact section */
+    .contact-form {
+      background-color: rgba(255, 255, 255, 0.05);
+      padding: 2rem;
+      border-radius: 10px;
+      margin-top: 2rem;
+      max-width: 600px;
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+    }
+    
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      background-color: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 5px;
+      color: var(--light);
+      transition: var(--transition);
+    }
+    
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--secondary);
+    }
+    
+    .form-group textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+    
+    /* Footer */
+    footer {
+      padding: 2rem 10%;
+      background-color: rgba(18, 18, 18, 0.9);
+      text-align: center;
+    }
+    
+    .social-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      margin-bottom: 1.5rem;
+    }
+    
+    .social-icon {
+      font-size: 1.5rem;
+      color: var(--light);
+      transition: var(--transition);
+    }
+    
+    .social-icon:hover {
+      color: var(--secondary);
+      transform: translateY(-3px);
+    }
+    
+    /* 3D Canvas */
+    #threejs-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: 0;
+    }
+    
+    /* Responsive styles */
+    @media (max-width: 768px) {
+      section {
+        padding: 5rem 5%;
+      }
+      
+      .navbar {
+        padding: 1.5rem 5%;
+      }
+      
+      h1 {
+        font-size: 2.8rem;
+      }
+      
+      h2 {
+        font-size: 2rem;
+      }
+      
+      .hero-btns {
+        flex-direction: column;
+      }
+      
+      .nav-links {
+        position: fixed;
+        top: 0;
+        right: -300px;
+        height: 100vh;
+        width: 300px;
+        background-color: var(--dark);
+        flex-direction: column;
+        padding: 5rem 2rem;
+        transition: var(--transition);
+      }
+      
+      .nav-links.active {
+        right: 0;
+      }
+      
+      .menu-btn {
+        display: block;
+        font-size: 1.5rem;
+        z-index: 1001;
+        cursor: pointer;
+      }
+      
+      .close-btn {
+        position: absolute;
+        top: 2rem;
+        right: 2rem;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+    }
+  </style>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+  <!-- Navigation -->
+  <nav class="navbar">
+    <div class="logo">TG</div>
+    <ul class="nav-links">
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="menu-btn">
+      <i class="fas fa-bars"></i>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section id="home" class="hero">
+    <canvas id="threejs-canvas"></canvas>
+    <div class="hero-content">
+      <p class="hero-subtitle">Hi there, I'm</p>
+      <h1>Tejas G</h1>
+      <p>Full Stack Developer specializing in building exceptional digital experiences. Currently focused on building accessible, human-centered products.</p>
+      <div class="hero-btns">
+        <button>View My Work</button>
+        <button class="btn-secondary">Contact Me</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- About Section -->
+  <section id="about">
+    <h2>About Me</h2>
+    <p>I'm a 19-year-old passionate Full Stack Developer with a Bachelor of Computer Applications (BCA) degree from Maharaja Institution of Technology in Mysuru. My journey in coding began early, tinkering with HTML and CSS to build simple websites.</p>
+    <p>Currently based in 5th Cross, Kallahalli, Mandya, Karnataka, I've cultivated a strong foundation in both frontend and backend technologies, allowing me to build complete, scalable applications from the ground up. Despite my young age, I've developed a strong passion for creating elegant solutions to complex problems.</p>
+    <p>My education at MIT Mysuru has equipped me with the theoretical knowledge and practical skills needed to excel in the rapidly evolving tech landscape. I believe in continuous learning and staying updated with the latest industry trends and technologies.</p>
+    <p>When I'm not coding, you can find me exploring new technologies, contributing to open-source projects, or sharing my knowledge through technical blog posts. I'm always open to new opportunities and collaborations.</p>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects">
+    <h2>My Projects</h2>
+    <p>Here are some of the projects I've worked on. Each project represents a unique challenge and solution that I'm proud to have been a part of.</p>
+    <div class="projects-grid">
+      <div class="project-card">
+        <img src="/api/placeholder/400/200" alt="E-commerce Dashboard" class="project-img">
+        <div class="project-info">
+          <h3 class="project-title">E-commerce Dashboard</h3>
+          <p>A comprehensive dashboard for e-commerce businesses to track sales, inventory, and customer analytics in real-time.</p>
+          <div class="project-tags">
+            <span class="project-tag">React</span>
+            <span class="project-tag">Node.js</span>
+            <span class="project-tag">MongoDB</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-card">
+        <img src="/api/placeholder/400/200" alt="Social Media App" class="project-img">
+        <div class="project-info">
+          <h3 class="project-title">Social Media App</h3>
+          <p>A full-featured social media application with real-time messaging, posts, and user interactions.</p>
+          <div class="project-tags">
+            <span class="project-tag">Vue.js</span>
+            <span class="project-tag">Express</span>
+            <span class="project-tag">Socket.io</span>
+          </div>
+        </div>
+      </div>
+      <div class="project-card">
+        <img src="/api/placeholder/400/200" alt="Task Management Tool" class="project-img">
+        <div class="project-info">
+          <h3 class="project-title">Task Management Tool</h3>
+          <p>A collaborative task management application designed for teams to organize and track project progress.</p>
+          <div class="project-tags">
+            <span class="project-tag">Angular</span>
+            <span class="project-tag">Django</span>
+            <span class="project-tag">PostgreSQL</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Skills Section -->
+  <section id="skills">
+    <h2>My Skills</h2>
+    <p>I've worked with a variety of programming languages, frameworks, and tools throughout my education and personal projects. Here are some of the key technologies I specialize in:</p>
+    <div class="skills-container">
+      <div class="skill-card">
+        <i class="fa-brands fa-html5 skill-icon"></i>
+        <h3>HTML</h3>
+      </div>
+      <div class="skill-card">
+        <i class="fa-brands fa-css3-alt skill-icon"></i>
+        <h3>CSS3</h3>
+      </div>
+      <div class="skill-card">
+        <i class="fab fa-react skill-icon"></i>
+        <h3>React</h3>
+      </div>
+      <div class="skill-card">
+        <i class="fab fa-node skill-icon"></i>
+        <h3>Node.js</h3>
+      </div>
+      <div class="skill-card">
+        <i class="fab fa-js skill-icon"></i>
+        <h3>JavaScript</h3>
+      </div>
+      <div class="skill-card">
+        <i class="fab fa-python skill-icon"></i>
+        <h3>Python</h3>
+      </div>
+
+      <div class="skill-card">
+        <i class="fab fa-git-alt skill-icon"></i>
+        <h3>Git</h3>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact">
+    <h2>Get In Touch</h2>
+    <p>Whether you have a project in mind or just want to connect, feel free to reach out. I'm always open to discussing new projects, creative ideas or opportunities to be part of your vision.</p>
+    <div class="contact-form">
+      <form id="contact-form">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" required>
+        </div>
+        <div class="form-group">
+          <label for="subject">Subject</label>
+          <input type="text" id="subject" name="subject" required>
+        </div>
+        <div class="form-group">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+        <button type="submit">Send Message</button>
+      </form>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="social-links">
+      <a href="#" class="social-icon"><i class="fab fa-github"></i></a>
+      <a href="#" class="social-icon"><i class="fab fa-linkedin"></i></a>
+      <a href="#" class="social-icon"><i class="fab fa-twitter"></i></a>
+      <a href="#" class="social-icon"><i class="fab fa-instagram"></i></a>
+    </div>
+    <p>&copy; 2025 Tejas G. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/0.159.0/three.min.js"></script>
+  <script>
+    // Navigation menu toggle
+    const menuBtn = document.querySelector('.menu-btn');
+    const navLinks = document.querySelector('.nav-links');
+    
+    if (menuBtn) {
+      menuBtn.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+      });
+    }
+
+    // Contact form submission
+    const contactForm = document.getElementById('contact-form');
+    
+    if (contactForm) {
+      contactForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        
+        // In a real application, you would send this data to your backend
+        const formData = new FormData(contactForm);
+        console.log('Form submitted', Object.fromEntries(formData));
+        
+        // Show success message
+        alert('Thank you for your message! I will get back to you soon.');
+        contactForm.reset();
+      });
+    }
+
+    // Three.js background animation
+    function initThreeJS() {
+      const canvas = document.getElementById('threejs-canvas');
+      if (!canvas) return;
+      
+      const scene = new THREE.Scene();
+      const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+      
+      const renderer = new THREE.WebGLRenderer({
+        canvas: canvas,
+        alpha: true,
+        antialias: true
+      });
+      
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+      
+      // Create particles
+      const particlesGeometry = new THREE.BufferGeometry();
+      const particlesCount = 1000;
+      
+      const posArray = new Float32Array(particlesCount * 3);
+      
+      for (let i = 0; i < particlesCount * 3; i++) {
+        posArray[i] = (Math.random() - 0.5) * 5;
+      }
+      
+      particlesGeometry.setAttribute('position', new THREE.BufferAttribute(posArray, 3));
+      
+      const particlesMaterial = new THREE.PointsMaterial({
+        size: 0.005,
+        color: 0x009ffd
+      });
+      
+      const particlesMesh = new THREE.Points(particlesGeometry, particlesMaterial);
+      scene.add(particlesMesh);
+      
+      // Add ambient light
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+      scene.add(ambientLight);
+      
+      // Camera position
+      camera.position.z = 3;
+      
+      // Mouse movement
+      let mouseX = 0;
+      let mouseY = 0;
+      
+      document.addEventListener('mousemove', (event) => {
+        mouseX = event.clientX / window.innerWidth - 0.5;
+        mouseY = event.clientY / window.innerHeight - 0.5;
+      });
+      
+      // Animation
+      const animate = () => {
+        requestAnimationFrame(animate);
+        
+        particlesMesh.rotation.y += 0.001;
+        particlesMesh.rotation.x += 0.001;
+        
+        camera.position.x += (mouseX * 0.5 - camera.position.x) * 0.1;
+        camera.position.y += (-mouseY * 0.5 - camera.position.y) * 0.1;
+        
+        renderer.render(scene, camera);
+      };
+      
+      animate();
+      
+      // Handle window resize
+      window.addEventListener('resize', () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      });
+    }
+    
+    // Initialize Three.js once the DOM is loaded
+    document.addEventListener('DOMContentLoaded', initThreeJS);
+
+// server.js
+const express = require('express');
+const path = require('path');
+const bodyParser = require('body-parser');
+const nodemailer = require('nodemailer');
+const mongoose = require('mongoose');
+require('dotenv').config();
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+// Middleware
+app.use(express.static(path.join(__dirname, 'public')));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+// MongoDB Connection
+mongoose.connect(process.env.MONGODB_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true
+})
+.then(() => console.log('MongoDB connected'))
+.catch(err => console.error('MongoDB connection error:', err));
+
+// Message Schema
+const messageSchema = new mongoose.Schema({
+  name: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true
+  },
+  subject: {
+    type: String,
+    required: true
+  },
+  message: {
+    type: String,
+    required: true
+  },
+  date: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+const Message = mongoose.model('Message', messageSchema);
+
+// API Routes
+app.post('/api/contact', async (req, res) => {
+  try {
+    const { name, email, subject, message } = req.body;
+    
+    // Save message to database
+    const newMessage = new Message({
+      name,
+      email,
+      subject,
+      message
+    });
+    
+    await newMessage.save();
+    
+    // Send email notification
+    const transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_USER,
+        pass: process.env.EMAIL_PASS
+      }
+    });
+    
+    const mailOptions = {
+      from: process.env.EMAIL_USER,
+      to: process.env.CONTACT_EMAIL,
+      subject: `Portfolio Contact: ${subject}`,
+      text: `
+        Name: ${name}
+        Email: ${email}
+        Message: ${message}
+      `
+    };
+    
+    await transporter.sendMail(mailOptions);
+    
+    res.status(200).json({ success: true, message: 'Message sent successfully' });
+  } catch (error) {
+    console.error('Error sending message:', error);
+    res.status(500).json({ success: false, message: 'Error sending message' });
+  }
+});
+
+// Project Schema
+const projectSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: true
+  },
+  description: {
+    type: String,
+    required: true
+  },
+  imageUrl: {
+    type: String,
+    required: true
+  },
+  tags: {
+    type: [String],
+    required: true
+  },
+  projectUrl: {
+    type: String
+  },
+  githubUrl: {
+    type: String
+  },
+  featured: {
+    type: Boolean,
+    default: false
+  },
+  createdAt: {
+    type: Date,
+    default: Date.now
+  }
+});
+
+const Project = mongoose.model('Project', projectSchema);
+
+// Get all projects
+app.get('/api/projects', async (req, res) => {
+  try {
+    const projects = await Project.find().sort({ featured: -1, createdAt: -1 });
+    res.status(200).json(projects);
+  } catch (error) {
+    console.error('Error fetching projects:', error);
+    res.status(500).json({ message: 'Error fetching projects' });
+  }
+});
+
+// Get featured projects
+app.get('/api/projects/featured', async (req, res) => {
+  try {
+    const featuredProjects = await Project.find({ featured: true });
+    res.status(200).json(featuredProjects);
+  } catch (error) {
+    console.error('Error fetching featured projects:', error);
+    res.status(500).json({ message: 'Error fetching featured projects' });
+  }
+});
+
+// Serve index.html for any other route (SPA support)
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
+});
+</script>
+</body>
+</html>
